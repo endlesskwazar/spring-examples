@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Product details</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<div class="row">
+			<div class="col">
+				<h1 th:text="'Product ' + ${product.title} + ' details'"></h1>
+				<hr />
+				<ul class="list-group">
+					<li class="list-group-item" th:text="'Title: ' + ${product.title}"></li>
+					<li class="list-group-item" th:text="'Description ' + ${product.description}"></li>
+					<li class="list-group-item" th:text="'Price ' + ${product.price}"></li>
+				</ul>
+				<hr />
+				<a th:href="@{/products}">Back to list</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
