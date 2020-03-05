@@ -2,8 +2,15 @@ package com.example.demo.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
 	public Long getId() {
 		return id;
@@ -38,6 +45,9 @@ public class Product {
 		this.title = title;
 		this.description = description;
 		this.price = price;
+	}
+	public Product() {
+		super();
 	}
 	@Override
 	public String toString() {
