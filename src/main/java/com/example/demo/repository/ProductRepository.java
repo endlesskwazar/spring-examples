@@ -1,47 +1,16 @@
 package com.example.demo.repository;
 
-import java.util.Comparator;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.math.BigDecimal;
 
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
 import com.example.demo.model.Product;
-import com.example.demo.dummydata.DummyData;
 
-@Repository
-@Profile("dummy-data")
-public class ProductRepository implements com.example.demo.repository.Repository<Product, Long> {
-	
-	public void removeById(Long id) {
-		Product productToDelete = DummyData.getInstance().getProducts().stream()
-				.filter(p -> p.getId().equals(id))
-				.findAny()
-				.get();
-		DummyData.getInstance().getProducts().remove(productToDelete);
-	}
+public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
 
-	@Override
-	public Product save(Product entity) {
-		Product maxById = DummyData.getInstance().getProducts()
-			      .stream()
-			      .max(Comparator.comparing(Product::getId))
-			      .orElseThrow(NoSuchElementException::new);
-		entity.setId(maxById.getId() + 1);
-		DummyData.getInstance().getProducts().add(entity);
-		return entity;
-	}
-
-	@Override
-	public Optional<Product> getById(Long id) {
-		return DummyData.getInstance().getProducts().stream()
-				.filter(p -> p.getId().equals(id))
-				.findAny();
-	}
-
-	@Override
-	public Iterable<Product> findAll() {
-		return DummyData.getInstance().getProducts();
-	}
+	public Page<Product> findByPriceGreaterThanAndPriceLessThan(BigDecimal leftPrice,
+			BigDecimal rightPrice, Pageable pageable);
 	
 }

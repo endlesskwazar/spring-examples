@@ -1,0 +1,12 @@
+[
+    {
+        "_class": "com.example.demo.model.Category",
+        "id": 1,
+        "title": "Phones"
+    },
+    {
+        "_class": "com.example.demo.model.Category",
+        "id": 2,
+        "title": "Tablets"
+    }
+]

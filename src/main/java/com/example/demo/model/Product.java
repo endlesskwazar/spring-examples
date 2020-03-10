@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -49,9 +51,20 @@ public class Product {
 	public Product() {
 		super();
 	}
+	
 	@Override
 	public String toString() {
-		return "Product [title=" + title + ", description=" + description + ", price=" + price + "]";
+		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", price=" + price
+				+ ", category=" + category + "]";
+	}
+	@ManyToOne
+	@JoinColumn(name="prod_cat", nullable = false)
+	private Category category;
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 }
